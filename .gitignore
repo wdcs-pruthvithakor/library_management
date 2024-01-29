@@ -39,3 +39,6 @@ media/
 *~
 *.swp
 *.bak
+
+# Ignore coverage reports
+.coverage
