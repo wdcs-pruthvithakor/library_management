@@ -72,10 +72,9 @@ class BookCreateView(LibrarianRequiredMixin, CreateView):
     success_url = reverse_lazy('book_list')
 
     def form_valid(self, form):
-        # Do something with the form data (e.g., save to the database)
+        
         response = super().form_valid(form)
-
-        # Add a success message
+   
         messages.success(self.request, 'Book created successfully.', extra_tags='bg-success')
 
         return response
@@ -87,10 +86,10 @@ class BookUpdateView(LibrarianRequiredMixin, UpdateView):
     success_url = reverse_lazy('book_list')
 
     def form_valid(self, form):
-        # Do something with the form data (e.g., save to the database)
+        
         response = super().form_valid(form)
         obj = self.get_object()
-        # Add a success message
+        
         messages.success(self.request, f'Book {obj.title.upper()} Updated successfully.', extra_tags='bg-success')
 
         return response
@@ -158,10 +157,9 @@ class BorrowerCreateView(LibrarianRequiredMixin, CreateView):
     success_url = reverse_lazy('borrower_list')
 
     def form_valid(self, form):
-        # Do something with the form data (e.g., save to the database)
+        
         response = super().form_valid(form)
 
-        # Add a success message
         messages.success(self.request, 'Borrower created successfully.', extra_tags='bg-success')
 
         return response
@@ -173,10 +171,10 @@ class BorrowerUpdateView(LibrarianRequiredMixin, UpdateView):
     success_url = reverse_lazy('borrower_list')
 
     def form_valid(self, form):
-        # Do something with the form data (e.g., save to the database)
+        
         response = super().form_valid(form)
         obj = self.get_object()
-        # Add a success message
+        
         messages.success(self.request, f'Borrower {obj.name.upper()} Updated successfully.', extra_tags='bg-success')
 
         return response
@@ -530,7 +528,7 @@ class CustomLoginView(FormView):
     def get_success_url(self):
         # Check if the user is a staff user
         if self.request.user.is_staff:
-            return reverse_lazy('book_list')  # Replace with your staff dashboard URL
+            return reverse_lazy('book_list')
         elif self.request.user.has_perm('book_management.can_borrow') and self.request.user.has_perm('book_management.can_return'):
             return reverse_lazy('available_books')
         else:
