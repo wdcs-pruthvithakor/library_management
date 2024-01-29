@@ -1,0 +1,12 @@
+{% extends "form_base.html" %}
+{% load django_bootstrap5 %}
+{% block content %}
+  <h2>Create/Update Book</h2>
+  <form method="post">
+    {% csrf_token %}
+    {%bootstrap_form form layout="floating" %}
+    <button class="btn btn-success" type="submit">Save</button>
+  </form>
+  <br>
+  <a class="btn btn-secondary" href="{% url 'book_list' %}">Back to Book List</a>
+{% endblock %}

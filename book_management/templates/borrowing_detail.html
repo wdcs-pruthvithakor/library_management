@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load django_bootstrap5 %}
+{% block content %}
+  <h2>{{ borrowing.book.title|capfirst }} Borrowing Details</h2>
+  <table id="table" class="table table-striped-columns">
+    <tr>
+      <th scope="row">Borrow ID</th>
+      <td>{{ borrowing.id }}</td>
+    </tr>
+    <tr>
+      <th scope="row">Book Title</th>
+      <td>{{ borrowing.book.title|default:"(removed)" }}</td>
+    </tr>
+    <tr>
+      <th scope="row">Book Author</th>
+      <td>{{ borrowing.book.author|default:"(removed)" }}</td>
+    </tr>
+    <tr>
+        <th scope="row">Book ISBN No</th>
+        <td>{{borrowing.book.ISBN|default:"(removed)"}}</td>
+      </tr>
+    <tr>
+        <th scope="row">Book Publication Date</th>
+        <td>{{borrowing.book.publication_date|default:"(removed)"}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Borrower Name</th>
+        <td>{{ borrowing.borrower.name|default:"(removed)" }}</td>
+      </tr>
+      <tr>
+        <th scope="row">Borrower Phone no</th>
+        <td>{{ borrowing.borrower.phone_number|default:"(removed)" }}</td>
+      </tr>
+      <tr>
+          <th scope="row">Borrower Username</th>
+          <td>{{borrowing.borrower.user.username|default:"(removed)"}}</td>
+        </tr>
+      <tr>
+        <th scope="row">Borrower Email</th>
+        <td>{{borrowing.borrower.user.email|default:"(removed)"}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Borrow Date</th>
+        <td>{{borrowing.borrow_date}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Return Date</th>
+        <td>{{borrowing.return_date|default:'Not Returned'}}</td>
+      </tr>
+  </table>
+{% endblock %}

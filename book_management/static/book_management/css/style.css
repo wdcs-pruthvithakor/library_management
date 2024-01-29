@@ -1,0 +1,29 @@
+body {
+    padding-top: 15px;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+a.ord {
+    line-height: 0.5 !important;
+    text-decoration: none!important;
+    color: #918f8f;
+}
+
+a.ord:hover {
+    opacity: 0.5;
+    text-decoration: none!important;
+}
+
+.oactive {
+    color: #517fc5 !important;
+    text-decoration: none!important;
+}
+
+tbody tr:hover td {
+    cursor: pointer;
+  }
+
+.table-details th:first-child {
+    background-color: #000000 !important;
+    color: #FFF !important;
+  }

@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% load django_bootstrap5 %}
+{% block content %}
+<div>
+  <div class="float-start"><h2>Borrower List</h2></div>
+  <div class="float-start ms-3"><form method="get" action="{% url 'borrower_list' %}">
+    <div class="input-group mb-3">
+        <input type="text" name="q" class="form-control" placeholder="Search..." value="{{ search_query|default:'' }}">
+        <input type="hidden" name="order_by" value="{{ order_by }}">
+        <input type="hidden" name="dir" value="{{ dir }}">
+        <button class="btn btn-outline-secondary" type="submit">Search</button>
+    </div>
+</form></div>
+  <div class="float-end">
+  <a id="{% url 'borrower_create' %}" class="btn btn-success" href="{% url 'borrower_create' %}">Create Borrower</a>
+</div>
+</div>
+  <table id="table" class="table table-dark table-striped table-hover">
+    <thead>
+      <tr>
+        <th>
+          <div class="d-flex">
+          <div class="d-flex flex-column pt-3">
+            Borrower Name
+            </div>
+              <div class="d-flex flex-column ms-2 pt-3">
+                  <a class="pt-1 ord {%if order_by == 'name' and dir == 'asc'%}oactive{%endif%}" href="?q={{ search_query|default:'' }}&{% if is_paginated %}page={{page_obj.number}}&{% endif %}order_by=name&dir=asc">&#9650;</a>
+                 
+                   <a class="pt-1 ord {%if order_by == 'name' and dir == 'desc'%}oactive{%endif%}" href="?q={{ search_query|default:'' }}&{% if is_paginated %}page={{page_obj.number}}&{% endif %}order_by=name&dir=desc">&#9660;</a>
+              </div>
+            </div>
+      </th>
+        <th>
+          <div class="d-flex">
+          <div class="d-flex flex-column pt-3">
+            Borrower Phone No 
+            </div>
+              <div class="d-flex flex-column ms-2 pt-3">
+                  <a class="pt-1 ord {%if order_by == 'phone_number' and dir == 'asc'%}oactive{%endif%}" href="?q={{ search_query|default:'' }}&{% if is_paginated %}page={{page_obj.number}}&{% endif %}order_by=phone_number&dir=asc">&#9650;</a>
+                 
+                   <a class="pt-1 ord {%if order_by == 'phone_number' and dir == 'desc'%}oactive{%endif%}" href="?q={{ search_query|default:'' }}&{% if is_paginated %}page={{page_obj.number}}&{% endif %}order_by=phone_number&dir=desc">&#9660;</a>
+              </div>
+            </div>
+      </th>
+        <th>Actions<th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for borrower in object_list %}
+      <tr onclick="location.href='{% url 'borrower_detail' pk=borrower.id %}';" data-bs-toggle="tooltip" data-bs-placement="top" title="Click here to view {{borrower.name|upper}} Details">
+        <td>{{ borrower.name }}</td>
+        <td>{{borrower.phone_number}}</td>
+        <td>
+          
+          <a class="btn btn-success ms-3" href="{% url 'borrower_update' pk=borrower.id %}">Update</a>
+          <a class="btn btn-danger ms-3" href="{% url 'borrower_delete' pk=borrower.id %}">Delete</a>
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  {% if is_paginated %}
+  <ul class="pagination">
+    {% if page_obj.has_previous %}
+      <li class="page-item"><a class="page-link" href="?page={{ page_obj.previous_page_number }}&q={{ search_query|default:'' }}&order_by={{ order_by }}&dir={{ dir }}">&laquo;</a></li>
+    {% else %}
+      <li class="page-item disabled"><span class="page-link">&laquo;</span></li>
+    {% endif %}
+
+    {% for i in paginator.page_range %}
+      {% if i == 1 or i == page_obj.number or i == paginator.num_pages %}
+        <li class="page-item {% if i == page_obj.number %}active{% endif %}">
+          <a class="page-link" href="?page={{ i }}&q={{ search_query|default:'' }}&order_by={{ order_by }}&dir={{ dir }}">{{ i }}{% if i == page_obj.number %} <span class="sr-only"></span>{% endif %}</a>
+        </li>
+      {% elif i > page_obj.number|add:"-3" and i < page_obj.number|add:"3" %}
+        <li class="page-item">
+          <a class="page-link" href="?page={{ i }}&q={{ search_query|default:'' }}&order_by={{ order_by }}&dir={{ dir }}">{{ i }}</a>
+        </li>
+      {% elif i == page_obj.number|add:"-3" or i == page_obj.number|add:"3" %}
+        <li class="page-item disabled"><span class="page-link">...</span></li>
+      {% endif %}
+    {% endfor %}
+
+    {% if page_obj.has_next %}
+      <li class="page-item"><a class="page-link" href="?page={{ page_obj.next_page_number }}&q={{ search_query|default:'' }}&order_by={{ order_by }}&dir={{ dir }}">&raquo;</a></li>
+    {% else %}
+      <li class="page-item disabled"><span class="page-link">&raquo;</span></li>
+    {% endif %}
+  </ul>
+{% endif %}
+<script>
+  let a = "{{has_next}}"
+  console.log(a)
+</script>
+{% endblock %}

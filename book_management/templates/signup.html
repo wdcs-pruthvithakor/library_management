@@ -1,0 +1,25 @@
+<!-- library/templates/signup.html -->
+{% extends "auth_base.html" %}
+{% load django_bootstrap5 %}
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-10"><h2>SIGN UP</h2></div>
+  <div class="col-2"><button id="themeToggleBtn" class="btn btn-btn border">
+    <i id="themeIcon" class="fas fa-sun"></i> <!-- Initially using sun icon -->
+</button>
+</div>
+</div>
+  <form method="post">
+    {% csrf_token %}
+      {% bootstrap_field form.username layout='floating' %}
+      {% bootstrap_field form.email layout='floating' %}
+      {% bootstrap_field form.password layout='floating' %}
+      {% bootstrap_field form.confirm_password layout='floating' %}
+      
+    <button class="btn btn-success" type="submit">Sign Up</button>
+  </form>
+  <br>
+  <a href="{% url 'login' %}">Already have an account? Login</a>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load django_bootstrap5 %}
+{% block content %}
+  <h2>{{ book.title|capfirst }} Details</h2>
+  <table id="table" class="table table-striped-columns">
+    <tr>
+      <th>Title</th>
+      <td>{{ book.title }}</td>
+    </tr>
+    <tr>
+      <th>Author</th>
+      <td>{{ book.author }}</td>
+    </tr>
+    <tr>
+        <th>ISBN No</th>
+        <td>{{book.ISBN}}</td>
+      </tr>
+    <tr>
+      <th>Availability Status</th>
+      <td>{% if book.availability_status %}Available{% else %}Not Available{% endif %}</td>
+    </tr>
+    <tr>
+        <th>Publication Date</th>
+        <td>{{book.publication_date}}</td>
+      </tr>
+    <tr>
+  </table>
+{% endblock %}

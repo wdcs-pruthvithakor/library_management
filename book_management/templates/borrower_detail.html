@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% load django_bootstrap5 %}
+{% block content %}
+  <h2>{{ borrower.name|capfirst }} Details</h2>
+  <table id="table" class="table table-striped-columns">
+    <tr>
+      <th>Name</th>
+      <td>{{ borrower.name }}</td>
+    </tr>
+    <tr>
+      <th>Phone no</th>
+      <td>{{ borrower.phone_number }}</td>
+    </tr>
+    <tr>
+        <th>Username</th>
+        <td>{{borrower.user.username}}</td>
+      </tr>
+    <tr>
+      <th>Email</th>
+      <td>{{borrower.user.email}}</td>
+    </tr>
+    
+  </table>
+{% endblock %}
