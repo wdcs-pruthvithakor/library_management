@@ -19,9 +19,14 @@ jobs:
       postgres:
         image: postgres:latest
         env:
-          POSTGRES_DB: ${{ secrets.POSTGRES_DB }}
-          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
-          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          POSTGRES_DB: mydatabase
+          POSTGRES_USER: myuser
+          POSTGRES_PASSWORD: mypassword
+          POSTGREDB_HOST: localhost
+          POSTGREDB_PORT: 5432
+          POSTGREDB_NAME: mydatabase
+          POSTGREDB_USER: myuser
+          POSTGREDB_PASSWORD: mypassword
         ports:
           - 5432:5432
         options: --health-cmd pg_isready --health-interval 10s --health-timeout 5s --health-retries 5
@@ -38,6 +43,11 @@ jobs:
         pip install -r requirements.txt
     - name: Run Tests
       env:
-        DATABASE_URL: postgresql://${{ secrets.POSTGRES_USER }}:${{ secrets.POSTGRES_PASSWORD }}@localhost:5432/${{ secrets.POSTGRES_DB }}
+        DATABASE_URL: postgresql://myuser:mypassword@localhost:5432/mydatabase
+        POSTGREDB_HOST: localhost
+        POSTGREDB_PORT: 5432
+        POSTGREDB_NAME: mydatabase
+        POSTGREDB_USER: myuser
+        POSTGREDB_PASSWORD: mypassword
       run: |
         python manage.py test
