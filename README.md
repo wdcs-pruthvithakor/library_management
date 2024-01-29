@@ -164,3 +164,6 @@ This will display a detailed report indicating the percentage of code coverage.
 
 Use Django's `TestCase` class to create fixtures and mock objects for testing. This ensures that tests are isolated and do not interfere with each other.
 
+### Continuous Integration (CI)
+
+Check Continous Integration pipeline of this project. This ensures that tests are automatically run whenever changes are pushed to the repository, helping to catch and address issues early in the development process.
