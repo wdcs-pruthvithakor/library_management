@@ -1,4 +1,6 @@
-
+"""
+URLs for library_management application.
+"""
 from django.urls import path
 from django.contrib.auth import views as auth_views
 from django.views.decorators.csrf import requires_csrf_token
