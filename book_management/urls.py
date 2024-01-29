@@ -2,8 +2,7 @@
 URLs for library_management application.
 """
 from django.urls import path
-from django.contrib.auth import views as auth_views
-from django.views.decorators.csrf import requires_csrf_token
+from django.views.generic.base import RedirectView
 from .views import (
     CustomLoginView, CustomSignupView, CustomLogoutView, 
     BorrowerListView, BorrowerCreateView, BorrowerUpdateView, BorrowerDeleteView, BorrowerDetailView,
@@ -13,6 +12,7 @@ from .views import (
 )
 
 urlpatterns = [
+    path('', RedirectView.as_view(url='login/', permanent=True),name='home'),
     path('login/', CustomLoginView.as_view(), name='login'),
     path('logout/', CustomLogoutView.as_view(), name='logout'),
     path('signup/', CustomSignupView.as_view(), name='signup'),
