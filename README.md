@@ -92,8 +92,6 @@ Visit [http://localhost:8000/](http://localhost:8000/) to access the application
 - `/history/`: View borrowing history.
 - `/borrower/history/`: View borrower-specific borrowing history.
 
-Certainly! Here's an extended README.md section for testing your Django project:
-
 ## Testing
 
 The project uses the Django testing framework for writing and running tests. Before running tests, ensure you have set up the project and activated the virtual environment.
